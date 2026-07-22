@@ -70,6 +70,15 @@ tetris/
 | Pranshu Chovatiya | @pranshu-chovatiya                                      |
 
 
+## 👥 Contributors
+
+| Name | GitHub |
+|------|--------|
+| Tanvi | [@tanvi-803](https://github.com/tanvi-803) |
+| Pranshu Chovatiya | [@pranshu-chovatiya](https://github.com/pranshu-chovatiya) |
+
+---
+
 ## 📜 License
 
 MIT License — feel free to use, modify, and share.
