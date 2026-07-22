@@ -1,4 +1,4 @@
-# 🎮 Tetris — Java (Swing GUI)
+# 🎮 Tetris — Java
 
 A fully-featured Tetris game built in Java using **Swing** for rendering. Features a dark premium UI with gradient block effects, ghost piece, hold system, and a 3-piece next queue.
 
