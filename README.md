@@ -62,6 +62,13 @@ tetris/
 ```
 
 ---
+## 👥 Contributors
+
+| Name              | GitHub                                                  |
+|-------------------|---------------------------------------------------------|
+| Tanvi Kakadiya    | @tanvi-803                                              |
+| Pranshu Chovatiya | @pranshu-chovatiya                                      |
+
 
 ## 📜 License
 
