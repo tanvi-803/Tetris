@@ -23,7 +23,7 @@ A fully-featured Tetris game built in Java using **Swing** for rendering. Featur
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/<your-username>/tetris.git
+git clone https://github.com/<tanvi-803>/tetris.git
 cd tetris
 
 # 2. Compile
