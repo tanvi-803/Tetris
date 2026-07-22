@@ -1,0 +1,22 @@
+# Compiled Java class files
+*.class
+
+# Executable JAR files
+*.jar
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE / Editor configs
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Build output
+out/
+build/
+bin/
