@@ -1,15 +1,14 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/**
- * Core Tetris game logic.
- * Manages the board grid, active piece, held piece, next-piece queue,
- * scoring, and all game-state transitions.
- */
+// Core Tetris game logic.
+// Manages the board grid, active piece, held piece, next-piece queue,
+// scoring, and all game-state transitions
+
 public class TetrisGame {
 
-    public static final int WIDTH  = 30; // Board columns (matches C++)
-    public static final int HEIGHT = 30; // Board rows    (matches C++)
+    public static final int WIDTH  = 30; // Board columns
+    public static final int HEIGHT = 30; // Board rows    
 
     // Board state: 0 = empty, 1 = filled
     public final int[][]     grid;
@@ -26,7 +25,7 @@ public class TetrisGame {
     public  boolean  gameOver  = false;
     public  boolean  quit      = false;
 
-    /** Number of lines cleared (used to calculate score display). */
+    // Number of lines cleared (used to calculate score display). 
     public  int      linesCleared = 0;
 
     public TetrisGame() {
@@ -36,20 +35,18 @@ public class TetrisGame {
         spawnPiece();
     }
 
-    // -----------------------------------------------------------------------
-    // Public game-state mutators (called from the Swing key listener)
-    // -----------------------------------------------------------------------
+    // Public game-state mutators (called from the Swing key listener)    
 
-    /** Move current piece left. */
+    // Move current piece left
     public void moveLeft()  { tryMove(currentPiece.x - 1, currentPiece.y); }
 
-    /** Move current piece right. */
+    // Move current piece right
     public void moveRight() { tryMove(currentPiece.x + 1, currentPiece.y); }
 
-    /** Soft-drop: move piece down one row. */
+    // Soft-drop: move piece down one row
     public void softDrop()  { tryMove(currentPiece.x, currentPiece.y + 1); }
 
-    /** Rotate piece clockwise; reject if invalid. */
+    // Rotate piece clockwise; reject if invalid
     public void rotate() {
         Tetromino temp = new Tetromino(currentPiece);
         temp.rotate();
@@ -57,7 +54,7 @@ public class TetrisGame {
             currentPiece.rotate();
     }
 
-    /** Hard-drop: instantly place piece at lowest valid row. */
+    // Hard-drop: instantly place piece at lowest valid row.
     public void hardDrop() {
         currentPiece.y += ghostDropDistance();
         mergePiece();
@@ -65,7 +62,7 @@ public class TetrisGame {
         spawnPiece();
     }
 
-    /** Hold the current piece (swap or store). */
+    // Hold the current piece (swap or store). 
     public void holdPiece() {
         if (!canHold) return;
         if (heldPiece == null) {
@@ -83,14 +80,11 @@ public class TetrisGame {
         canHold = false;
     }
 
-    // -----------------------------------------------------------------------
     // Gravity tick — called by the Swing Timer every ~200 ms
-    // -----------------------------------------------------------------------
 
-    /**
-     * Advances the game by one gravity step.
-     * Returns false when the game is over.
-     */
+    // Advances the game by one gravity step.
+    // Returns false when the game is over.
+    
     public boolean tick() {
         if (quit || gameOver) return false;
         if (paused) return true;
@@ -106,14 +100,10 @@ public class TetrisGame {
         return true;
     }
 
-    // -----------------------------------------------------------------------
     // Ghost piece (drop shadow)
-    // -----------------------------------------------------------------------
 
-    /**
-     * Returns how many rows the current piece can still fall.
-     * Used to render the ghost piece.
-     */
+    // Returns how many rows the current piece can still fall.
+    // Used to render the ghost piece.
     public int ghostDropDistance() {
         int d = 0;
         while (isValidMove(currentPiece, currentPiece.x, currentPiece.y + d + 1))
@@ -121,9 +111,7 @@ public class TetrisGame {
         return d;
     }
 
-    // -----------------------------------------------------------------------
     // Internal helpers
-    // -----------------------------------------------------------------------
 
     private void tryMove(int newX, int newY) {
         if (isValidMove(currentPiece, newX, newY)) {
@@ -132,9 +120,8 @@ public class TetrisGame {
         }
     }
 
-    /**
-     * Checks whether placing {@code piece} at (nx, ny) is a legal position.
-     */
+    // Checks whether placing {@code piece} at (nx, ny) is a legal position.
+     
     private boolean isValidMove(Tetromino piece, int nx, int ny) {
         for (int i = 0; i < Tetromino.BLOCK_SIZE; i++) {
             for (int j = 0; j < Tetromino.BLOCK_SIZE; j++) {
@@ -151,7 +138,7 @@ public class TetrisGame {
         return true;
     }
 
-    /** Stamps the current piece into the permanent grid. */
+    // Stamps the current piece into the permanent grid. 
     private void mergePiece() {
         for (int i = 0; i < Tetromino.BLOCK_SIZE; i++) {
             for (int j = 0; j < Tetromino.BLOCK_SIZE; j++) {
@@ -167,7 +154,7 @@ public class TetrisGame {
         }
     }
 
-    /** Scans for completed rows, clears them, and updates score. */
+    // Scans for completed rows, clears them, and updates score. 
     private void clearLines() {
         int cleared = 0;
         for (int i = HEIGHT - 1; i >= 0; i--) {
@@ -194,7 +181,7 @@ public class TetrisGame {
         linesCleared += cleared;
     }
 
-    /** Dequeues the next piece and checks for game-over. */
+    // Dequeues the next piece and checks for game-over. 
     private void spawnPiece() {
         if (nextPieces.isEmpty()) refillNextQueue();
         currentPiece = nextPieces.poll();
@@ -208,13 +195,13 @@ public class TetrisGame {
             gameOver = true;
     }
 
-    /** Keeps the next-piece queue at 3 pieces. */
+    // Keeps the next-piece queue at 3 pieces. 
     private void refillNextQueue() {
         while (nextPieces.size() < 3)
             nextPieces.add(new Tetromino(WIDTH));
     }
 
-    /** Resets a piece's position to top-center (for the held slot). */
+    // Resets a piece's position to top-center (for the held slot). 
     private void resetHeldPosition(Tetromino t) {
         t.x = WIDTH / 2 - Tetromino.BLOCK_SIZE / 2;
         t.y = 0;
