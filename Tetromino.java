@@ -1,14 +1,14 @@
 import java.awt.Color;
 
-/**
- * Represents a single Tetris piece (tetromino).
- * Stores the 4x4 shape grid, position on the board, type, and color.
- */
+
+//   Represents a single Tetris piece (tetromino).
+//   Stores the 4x4 shape grid, position on the board, type, and color.
+ 
 public class Tetromino {
 
     public static final int BLOCK_SIZE = 4;
 
-    // All 7 standard tetromino shapes (same layout as the C++ SHAPES array)
+    // All 7 standard tetromino shapes
     public static final int[][][] SHAPES = {
         {{0,0,0,0}, {1,1,1,1}, {0,0,0,0}, {0,0,0,0}}, // 0 - I
         {{0,0,0,0}, {0,1,1,0}, {0,1,1,0}, {0,0,0,0}}, // 1 - O
@@ -19,7 +19,7 @@ public class Tetromino {
         {{0,0,0,0}, {0,0,1,0}, {1,1,1,0}, {0,0,0,0}}  // 6 - L
     };
 
-    // Vibrant color palette matching the C++ color assignments
+    // Colours
     public static final Color[] COLORS = {
         new Color(0,   220, 220), // 0 - I : Cyan
         new Color(240, 220,   0), // 1 - O : Yellow
@@ -27,7 +27,7 @@ public class Tetromino {
         new Color(0,   200,  50), // 3 - S : Green
         new Color(220,  30,  30), // 4 - Z : Red
         new Color(30,   80, 220), // 5 - J : Blue
-        new Color(230, 120,   0), // 6 - L : Orange (Brown in C++)
+        new Color(230, 120,   0), // 6 - L : Orange
     };
 
     public int[][] shape;  // 4x4 grid for this piece
@@ -35,9 +35,8 @@ public class Tetromino {
     public int type;       // Piece type index (0-6)
     public Color color;    // Rendering color
 
-    /**
-     * Creates a random tetromino positioned at the top-center of the board.
-     */
+    //  Creates a random tetromino positioned at the top-center of the board.
+     
     public Tetromino(int boardWidth) {
         this.type  = (int)(Math.random() * 7);
         this.shape = copyShape(SHAPES[type]);
@@ -46,9 +45,8 @@ public class Tetromino {
         this.y     = 0;
     }
 
-    /**
-     * Copy constructor — deep-copies another Tetromino.
-     */
+    //  Copy constructor — deep-copies another Tetromino.
+    
     public Tetromino(Tetromino other) {
         this.type  = other.type;
         this.shape = copyShape(other.shape);
@@ -57,9 +55,8 @@ public class Tetromino {
         this.y     = other.y;
     }
 
-    /**
-     * Rotates the piece 90 degrees clockwise (in-place).
-     */
+    // Rotates the piece 90 degrees clockwise (in-place).
+     
     public void rotate() {
         int[][] temp = new int[BLOCK_SIZE][BLOCK_SIZE];
         for (int i = 0; i < BLOCK_SIZE; i++)
@@ -68,7 +65,7 @@ public class Tetromino {
         shape = temp;
     }
 
-    /** Deep-copies a 2D shape array. */
+    // Deep-copies a 2D shape array. 
     private static int[][] copyShape(int[][] src) {
         int[][] dst = new int[BLOCK_SIZE][BLOCK_SIZE];
         for (int i = 0; i < BLOCK_SIZE; i++)
