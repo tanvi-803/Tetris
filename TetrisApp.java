@@ -5,7 +5,7 @@ import java.awt.event.*;
  * Entry point for the Java Tetris game.
  *
  * Creates the JFrame, wires up keyboard input, and drives the game loop
- * with a javax.swing.Timer (200 ms tick — matches the C++ timeout(200)).
+ * with a javax.swing.Timer (200 ms tick).
  */
 public class TetrisApp {
 
