@@ -63,7 +63,7 @@ public class TetrisApp {
         });
 
         // -------------------------------------------------------------------
-        // Game loop — gravity tick every 200 ms (same as C++ timeout(200))
+        // Game loop — gravity tick every 200 ms
         // -------------------------------------------------------------------
         Timer timer = new Timer(200, null);
         timer.addActionListener(e -> {
